@@ -2,16 +2,15 @@ import random
 import sys
 from random import randint
 
+from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QApplication, QWidget
 
-from UI import Ui_Form
 
-
-class SqPainter(QWidget, Ui_Form):
+class SqPainter(QWidget):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
+        uic.loadUi('UI.ui', self)
         self.pushButton.clicked.connect(self.paint)
         self.do_paint = False
 
@@ -25,7 +24,7 @@ class SqPainter(QWidget, Ui_Form):
             x = random.randint(0, w - r)
             y = random.randint(0, h - r - 50)
             print(size)
-            qp.setBrush(QColor('yellow'))
+            qp.setBrush(QColor(random.randint(0, 0xfffff)))
 
             qp.drawEllipse(x, y, 2 * r, 2 * r)
             qp.end()
@@ -46,4 +45,3 @@ if __name__ == '__main__':
     ex.show()
     sys.excepthook = except_hook
     sys.exit(app.exec_())
-
